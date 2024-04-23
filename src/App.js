@@ -17,21 +17,28 @@ import Calendar from "./scenes/calendar/calendar";
 import Patient from "./scenes/patient";
 import Doctor from "./scenes/doctor/doctor";
 import Address from "./scenes/clinicalAddress/addres";
+import Login from "./scenes/Login";
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+
         <div className="app">
-          <Sidebar isSidebar={isSidebar} />
+          {isLoggedIn && <Sidebar isSidebar={isSidebar} />}
           <main className="content">
-            <Topbar setIsSidebar={setIsSidebar} />
+            {isLoggedIn && <Topbar setIsSidebar={setIsSidebar} />}
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route
+                path="/"
+                element={<Login setIsLoggedIn={setIsLoggedIn} />}
+              />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/patient" element={<Patient />} />
               <Route path="/doctor" element={<Doctor />} />
               <Route path="/address" element={<Address />} />
