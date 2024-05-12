@@ -67,7 +67,7 @@ function Login({ setIsLoggedIn }) {
             "&:hover": { backgroundColor: "darkblue" },
           }}
         >
-          Sign In
+          Sign In.
         </Button>
       </form>
     </Container>
